@@ -14,12 +14,6 @@
 - macOS: Big Sur 11.2.2
 - Stack: Version 2.5.1.1 x86_64
 
-## TODO
-
-- [x] 09章
-- [x] 10章
-- [x] 11章
-
 ## 09章
 
 ```bash
