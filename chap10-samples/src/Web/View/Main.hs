@@ -27,7 +27,7 @@ import           Web.Core
     , runSqlite
     , wrconUser
     )
-import           Web.Spock              (getContext, getState, html)
+import           Web.Spock              (getContext, getState, html, redirect)
 
 -- src/Web/View/Main.hsに追記。
 -- テンプレートの読み込み。
@@ -76,18 +76,24 @@ weightGraphValue wrs = do
 -- メッセージを受け取って
 mainView :: Maybe TXT.Text -> WRAction a
 mainView mMes = do
-    Just user <- wrconUser <$> getContext
-    uv <- userValue user -- ユーザ情報
-    rs <- runSqlite $ selectWRecord (User.id user) -- SQLiteの情報
-    rvs <- mapM weightRecordValue rs
-    wgv <- weightGraphValue rs
-    tpl <- wrstMainTemplate <$> getState
-    let v =
-            object $
-            appendMessage
-                mMes
-                ["user" ~> uv, "records" ~> rvs, "graphs" ~> wgv]
-    html $ substitute tpl v
+    -- [FIXED] `Just`に直接パターンマッチできなかったので一度取り出してから case-of で判定
+    mu <- wrconUser <$> getContext
+    case mu of
+      Just user -> do
+        uv <- userValue user -- ユーザ情報
+        rs <- runSqlite $ selectWRecord (User.id user) -- SQLiteの情報
+        rvs <- mapM weightRecordValue rs
+        wgv <- weightGraphValue rs
+        tpl <- wrstMainTemplate <$> getState
+        let v =
+                object $
+                appendMessage
+                    mMes
+                    ["user" ~> uv, "records" ~> rvs, "graphs" ~> wgv]
+        html $ substitute tpl v
+      -- [FIXED] 暫定処理
+      Nothing -> do
+        redirect "/"
   where
     appendMessage (Just mes) ps = "message" ~> mes : ps
     appendMessage Nothing ps = ps

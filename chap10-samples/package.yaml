@@ -1,0 +1,74 @@
+name:                weight-recorder
+version:             0.1.0.0
+github:              "githubuser/weight-recorder"
+license:             BSD3
+author:              "Author name here"
+maintainer:          "example@example.com"
+copyright:           "2021 Author name here"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+data-files:
+- templates/start.mustache
+- templates/main.mustache
+- data/schema.sql
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/githubuser/auction#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+  dependencies:
+  - bcrypt
+  - bytestring
+  - filepath
+  - HDBC
+  - HDBC-sqlite3
+  - http-types
+  - Spock
+  - mustache
+  - persistable-record
+  - relational-query-HDBC
+  - relational-query
+  - resource-pool
+  - text
+  - time
+  - transformers
+  - wai
+
+executables:
+  weight-recorder:
+    main:                Main.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -Wall
+    dependencies:
+    - filepath
+    - optparse-applicative
+    - weight-recorder
+
+# tests:
+#   auction-test:
+#     main:                Spec.hs
+#     source-dirs:         test
+#     ghc-options:
+#     - -threaded
+#     - -rtsopts
+#     - -with-rtsopts=-N
+#     - -Wall
+#     dependencies:
+#     - auction

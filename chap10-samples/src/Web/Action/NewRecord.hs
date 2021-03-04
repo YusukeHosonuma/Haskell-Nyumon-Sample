@@ -21,11 +21,17 @@ newRecordAction = do
     case mWeight of
       Nothing -> mainView (Just "体重が誤っています") -- 体重の取得失敗を通知、mainViewは後で実装。
       Just weight -> do
-        Just user <- wrconUser <$> getContext  -- wrconUserからユーザを取得。
-        now <- liftIO utcTime
-        let record = NewWRecord (User.id user) now weight
-        n <- runSqlite $ insertNewWRecord record
-        when (n == 0) $ mainView (Just "記録に失敗しました")
-        redirect "/"
+        -- [FIXED] `Just`に直接パターンマッチできなかったので一度取り出してから case-of で判定
+        mu <- wrconUser <$> getContext  -- wrconUserからユーザを取得。
+        case mu of
+          Just user -> do
+            now <- liftIO utcTime
+            let record = NewWRecord (User.id user) now weight
+            n <- runSqlite $ insertNewWRecord record
+            when (n == 0) $ mainView (Just "記録に失敗しました")
+            redirect "/"
+          -- [FIXED] 暫定
+          Nothing -> do
+            redirect "/"
   where
     utcTime = TM.utcToLocalTime TM.utc <$> TM.getCurrentTime

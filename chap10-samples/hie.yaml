@@ -1,0 +1,10 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "weight-recorder:lib"
+
+    - path: "./app/Main.hs"
+      component: "weight-recorder:exe:weight-recorder"
+
+    - path: "./app/Paths_weight_recorder.hs"
+      component: "weight-recorder:exe:weight-recorder"
