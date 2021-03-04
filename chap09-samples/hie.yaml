@@ -1,0 +1,13 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "hjq:lib"
+
+    - path: "./app/Main.hs"
+      component: "hjq:exe:hjq"
+
+    - path: "./app/Paths_hjq.hs"
+      component: "hjq:exe:hjq"
+
+    - path: "./test"
+      component: "hjq:test:hjq-test"

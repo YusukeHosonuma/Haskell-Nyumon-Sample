@@ -7,7 +7,7 @@
 - ✅ 基本的にStackageの最新のLTSを利用するように（古いGHCだとビルドに失敗する問題に遭遇したため）。
 - ✅ ビルドエラーになる箇所を`[FIXED]`のコメントをつけて修正。
 - ✅ `package.yaml`を利用するように。
-- ✅ `hie.yaml`を作成し、VSCode上で[Haskell拡張](https://marketplace.visualstudio.com/items?itemName=haskell.haskell)が動作するように。
+- ✅ `hie.yaml`を作成し、VSCode上で[Haskell拡張](https://marketplace.visualstudio.com/items?itemName=haskell.haskell)が動作するように。（[implicit-hie](https://hackage.haskell.org/package/implicit-hie)で生成）
 
 ## 動作確認環境
 
@@ -16,9 +16,17 @@
 
 ## TODO
 
-- [ ] 9章
+- [ ] 09章
 - [ ] 10章
 - [x] 11章
+
+## 09章
+
+```bash
+$ code ./chap11-samples # VSCodeのHaskell拡張を動かすためには個別に開く必要あり
+$ stack build --test hjq
+$ echo '[ { "age": 25, "name": "佐藤太郎", "tel-number": "111-1111" }, { "age": 26, "name": "斎藤花子", "tel-number": "222-2222" }, { "age": 27, "name": "山田太郎", "tel-number": "333-3333" } ]' | stack exec hjq -- '{"name":.[2].name,"tel-numer":.[2].tel-number}'
+```
 
 ## 11章
 

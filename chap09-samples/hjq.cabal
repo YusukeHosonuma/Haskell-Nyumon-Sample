@@ -1,62 +1,82 @@
-name:                hjq
-version:             0.1.0.0
--- synopsis:
--- description:
-homepage:            https://github.com/githubuser/hjq#readme
-license:             BSD3
-license-file:        LICENSE
-author:              Author name here
-maintainer:          example@example.com
-copyright:           2017 Author name here
-category:            Web
-build-type:          Simple
-extra-source-files:  README.md
-cabal-version:       >=1.10
+cabal-version: 1.12
 
-library
-  hs-source-dirs:      src
-  exposed-modules:     Data.Hjq
-                     , Data.Hjq.Parser 
-                     , Data.Hjq.Query
-  build-depends:       base >= 4.7 && < 5
-                     , aeson
-                     , aeson-pretty
-                     , attoparsec
-                     , text
-                     , bytestring
-                     , unordered-containers
-                     , lens-aeson
-                     , lens
-                     , vector
-                     , errors
-  default-language:    Haskell2010
+-- This file has been generated from package.yaml by hpack version 0.34.3.
+--
+-- see: https://github.com/sol/hpack
 
-executable hjq
-  hs-source-dirs:      app
-  main-is:             Main.hs
-  build-depends:       base
-                     , hjq
-                     , bytestring
-                     , text
-  ghc-options:       -Wall
-  default-language:    Haskell2010
-
-test-suite hjq-test
-  type:                exitcode-stdio-1.0
-  hs-source-dirs:      test
-  main-is:             Spec.hs
-  other-modules:       ParserTest
-  build-depends:       base
-                     , aeson
-                     , hjq
-                     , vector
-                     , text
-                     , unordered-containers
-                     , HUnit
-                     , lens-aeson
-                     , lens
-  default-language:    Haskell2010
+name:           hjq
+version:        0.1.0.0
+description:    Please see the README on GitHub at <https://github.com/githubuser/hjq#readme>
+homepage:       https://github.com/githubuser/hjq#readme
+bug-reports:    https://github.com/githubuser/hjq/issues
+author:         Author name here
+maintainer:     example@example.com
+copyright:      2021 Author name here
+license:        BSD3
+license-file:   LICENSE
+build-type:     Simple
+extra-source-files:
+    README.md
+    ChangeLog.md
 
 source-repository head
-  type:     git
+  type: git
   location: https://github.com/githubuser/hjq
+
+library
+  exposed-modules:
+      Data.Hjq
+      Data.Hjq.Parser
+      Data.Hjq.Query
+  other-modules:
+      Paths_hjq
+  hs-source-dirs:
+      src
+  build-depends:
+      aeson
+    , aeson-pretty
+    , attoparsec
+    , base >=4.7 && <5
+    , bytestring
+    , errors
+    , lens
+    , lens-aeson
+    , text
+    , unordered-containers
+    , vector
+  default-language: Haskell2010
+
+executable hjq
+  main-is: Main.hs
+  other-modules:
+      Paths_hjq
+  hs-source-dirs:
+      app
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N -Wall
+  build-depends:
+      base >=4.7 && <5
+    , bytestring
+    , hjq
+    , text
+  default-language: Haskell2010
+
+test-suite hjq-test
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  other-modules:
+      ParserTest
+      Paths_hjq
+  hs-source-dirs:
+      test
+  ghc-options: -threaded -rtsopts -with-rtsopts=-N
+  build-depends:
+      HUnit
+    , aeson
+    , base >=4.7 && <5
+    , hjq
+    , lens
+    , lens-aeson
+    , text
+    , unordered-containers
+    , vector
+  default-language: Haskell2010
