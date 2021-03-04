@@ -1,0 +1,43 @@
+cradle:
+  stack:
+    - path: "./src"
+      component: "auction:lib"
+
+    - path: "./app/client.hs"
+      component: "auction:exe:auction-client"
+
+    - path: "./app/Main.hs"
+      component: "auction:exe:auction-client"
+
+    - path: "./app/Paths_auction.hs"
+      component: "auction:exe:auction-client"
+
+    - path: "./app/server.hs"
+      component: "auction:exe:auction-server"
+
+    - path: "./app/Main.hs"
+      component: "auction:exe:auction-server"
+
+    - path: "./app/Paths_auction.hs"
+      component: "auction:exe:auction-server"
+
+    - path: "./app/bidder-bot.hs"
+      component: "auction:exe:bidder-bot"
+
+    - path: "./app/Main.hs"
+      component: "auction:exe:bidder-bot"
+
+    - path: "./app/Paths_auction.hs"
+      component: "auction:exe:bidder-bot"
+
+    - path: "./app/counter.hs"
+      component: "auction:exe:counter-system"
+
+    - path: "./app/Main.hs"
+      component: "auction:exe:counter-system"
+
+    - path: "./app/Paths_auction.hs"
+      component: "auction:exe:counter-system"
+
+    - path: "./test"
+      component: "auction:test:auction-test"

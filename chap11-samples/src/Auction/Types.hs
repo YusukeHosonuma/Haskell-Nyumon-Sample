@@ -197,7 +197,9 @@ deriveJSON defaultOptions ''NewUser
 deriveJSON defaultOptions ''User
 deriveJSON defaultOptions ''Inventory
 deriveJSON defaultOptions ''UserId
-deriveJSON defaultOptions ''UUID
+
+-- [FIXED] UUID は既に `FromJSON` と `ToJSON` のインスタンスなので不要。
+-- deriveJSON defaultOptions ''UUID
 
 deriveJSON defaultOptions ''AuctionRequest
 deriveJSON defaultOptions ''AuctionResponse

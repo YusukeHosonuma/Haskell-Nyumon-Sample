@@ -4,7 +4,10 @@ module Main where
 import qualified Prelude (putStrLn, putStr, print)
 import Prelude hiding (putStrLn, putStr, print)
 import System.Console.Haskeline (InputT, runInputT, defaultSettings, getInputLine)
-import qualified System.Console.Haskeline.MonadException as Haskeline (catch)
+
+-- [FIXED] `InputT IO`を`Catch.MonadThrow`と`MonadCatch`のインスタンスにするためにインポートしているが、すでになっているため不要。
+-- import qualified System.Console.Haskeline.MonadException as Haskeline (catch)
+
 import Text.Read (readMaybe)
 import Control.Monad (forM_, when)
 import Control.Monad.IO.Class (MonadIO, liftIO)
@@ -23,14 +26,14 @@ import Auction.Client
 
 --------------------------------------------------------------------------------
 
--- FIXME: 2 orphan instances
-instance Catch.MonadThrow (InputT IO) where
-    throwM e = liftIO $ throwIO e
-instance Catch.MonadCatch (InputT IO) where
-    catch act handler = Haskeline.catch act $ \e ->
-        if isSyncException e
-            then handler e
-            else throwIO e
+-- [FIXED] すでにインスタンス化されているため不要。
+-- instance Catch.MonadThrow (InputT IO) where
+--     throwM e = liftIO $ throwIO e
+-- instance Catch.MonadCatch (InputT IO) where
+--     catch act handler = Haskeline.catch act $ \e ->
+--         if isSyncException e
+--             then handler e
+--             else throwIO e
 
 -- クライアントのモナド定義
 type AuctionClient = AuctionSessionT (InputT IO)

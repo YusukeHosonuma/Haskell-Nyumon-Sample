@@ -1,0 +1,127 @@
+name:                auction
+version:             0.1.0.0
+github:              "githubuser/auction"
+license:             BSD3
+author:              "Author name here"
+maintainer:          "example@example.com"
+copyright:           "2021 Author name here"
+
+extra-source-files:
+- README.md
+- ChangeLog.md
+
+# Metadata used when publishing your package
+# synopsis:            Short description of your package
+# category:            Web
+
+# To avoid duplicated efforts in documentation and dealing with the
+# complications of embedding Haddock markup inside cabal files, it is
+# common to point users to the README.md file.
+description:         Please see the README on GitHub at <https://github.com/githubuser/auction#readme>
+
+dependencies:
+- base >= 4.7 && < 5
+
+library:
+  source-dirs: src
+  dependencies:
+  - base >= 4.7 && < 5
+  - random
+  - async
+  - safe-exceptions
+  - stm
+  - transformers
+  - mtl
+  - lens
+  - lens-aeson
+  - aeson
+  - text
+  - time
+  - containers
+  - bytestring
+  - http-types
+  - uuid
+  - unordered-containers
+  - hashable
+  - wreq
+  - scotty
+
+executables:
+  auction-server:
+    main:                server.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -Wall
+    dependencies:
+    - base >= 4.7 && < 5
+    - auction
+    - async
+    - stm
+    - text
+    - safe-exceptions
+
+  auction-client:
+    main:                client.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -Wall
+    dependencies:
+    - base >= 4.7 && < 5
+    - auction
+    - time
+    - lens
+    - transformers
+    - mtl
+    - safe-exceptions
+    - exceptions
+    - safe
+    - haskeline
+
+  bidder-bot:
+    main:                bidder-bot.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -Wall
+    dependencies:
+    - base >= 4.7 && < 5
+    - auction
+    - lens
+
+  counter-system:
+    main:                counter.hs
+    source-dirs:         app
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -Wall
+    dependencies:
+    - base >= 4.7 && < 5
+    - aeson
+    - wreq
+    - lens
+    - stm
+    - scotty
+    - http-types
+    - safe-exceptions
+
+tests:
+  auction-test:
+    main:                Spec.hs
+    source-dirs:         test
+    ghc-options:
+    - -threaded
+    - -rtsopts
+    - -with-rtsopts=-N
+    - -Wall
+    dependencies:
+    - auction
